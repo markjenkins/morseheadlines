@@ -1,0 +1,4 @@
+[submodule "cduck_morse"]
+	path = cduck_morse
+	url = https://github.com/markjenkins/cduck_morse
+	branch = workableAsLibrary
