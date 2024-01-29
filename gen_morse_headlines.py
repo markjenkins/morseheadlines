@@ -82,6 +82,17 @@ FEED_MODS = [ mod for mod in [ load_feed_module(mod_name)
 # I add more feeds
 CUTOFF_DAYS = 1
 
+def construct_headline(entry, feed_mod):
+    if hasattr(feed_mod, 'ENTRY_ATTRIBUTES'):
+        return ' = '.join(
+            [ getattr(entry, attr)
+              for attr in feed_mod.ENTRY_ATTRIBUTES ]
+        )
+    elif hasattr(feed_mod, 'ENTRY_ATTRIBUTE'):
+        return getattr(entry, feed_mod.ENTRY_ATTRIBUTE)
+    else:
+        raise Exception('module ' + str(feed_mod) + ' lacks entry guidance')
+
 def get_headlines(feed_mod, now, now_str):
     cutoff = now - timedelta(days=CUTOFF_DAYS)
 
@@ -91,7 +102,8 @@ def get_headlines(feed_mod, now, now_str):
                 exists(feed_mod.DEBUG_FILE_OVERRIDE) )
         else feed_mod.DEBUG_FILE_OVERRIDE)
     parsed_feed = feedparser_parse(feed_url_or_path)
-    return [ ( getattr(entry, feed_mod.ENTRY_ATTRIBUTE) + ' ' +
+
+    return [ ( construct_headline(entry, feed_mod) + ' ' +
                feed_mod.NAME + ' ' +
                "%d-%.2d-%.2d" % entry.published_parsed[:3]
               )

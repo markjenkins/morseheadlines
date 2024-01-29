@@ -30,7 +30,11 @@
 
 NAME = 'CP via CNO'
 URL = 'https://www.nationalobserver.com/user/13/rss'
-ENTRY_ATTRIBUTE = 'summary'
+
+TITLE_ATTRIBUTE = 'title'
+SUMMARY_ATTRIBUTE = 'summary'
+
+ENTRY_ATTRIBUTES = [TITLE_ATTRIBUTE, SUMMARY_ATTRIBUTE]
 
 
 # for development/debugging, downloading the file with curl/wget etc and
