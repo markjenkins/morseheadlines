@@ -89,6 +89,7 @@ def construct_headline(entry, feed_mod):
     if hasattr(feed_mod, 'ENTRY_ATTRIBUTES'):
         return ' = '.join(
             [ getattr(entry, attr)
+              if hasattr(entry, attr)
               for attr in feed_mod.ENTRY_ATTRIBUTES ]
         )
     elif hasattr(feed_mod, 'ENTRY_ATTRIBUTE'):
