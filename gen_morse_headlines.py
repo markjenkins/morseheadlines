@@ -37,6 +37,9 @@ from importlib import import_module
 from cduck_morse.play import FREQ, main as cduck_play_main
 from cduck_morse.morseTable import forwardTable as MORSE_TABLE
 
+# eventually there will be multiple output speeds that can be chosen
+from morsegendefaults import DEFAULT_WPM, DEFAULT_FS
+
 # set to change tone frequency
 #FREQ=FREQ
 
@@ -112,14 +115,6 @@ def get_headlines(feed_mod, now, now_str):
              if (datetime.fromtimestamp(mktime(entry.published_parsed))
                  > cutoff )
             ]
-
-# 12/5 is Canadian amateur radio test standard
-# eventually there will be multiple output speeds
-#
-# training at a higher speed recommended to develop instant
-# character recognition
-DEFAULT_WPM = 12
-DEFAULT_FS = 5
 
 SHUFFLE = True # False may help when debugging
 MAX_STORIES = 10
