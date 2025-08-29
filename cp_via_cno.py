@@ -40,3 +40,9 @@ ENTRY_ATTRIBUTES = [TITLE_ATTRIBUTE, SUMMARY_ATTRIBUTE]
 # for development/debugging, downloading the file with curl/wget etc and
 # enabling this is recommended to avoid hitting the server over and over
 #DEBUG_FILE_OVERRIDE = 'CP_via_CNO.rss'
+
+
+if __name__ == "__main__":
+    from sys import modules
+    from morsehldebug import module_to_stdout
+    module_to_stdout(modules[__name__])
