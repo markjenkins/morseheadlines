@@ -107,15 +107,16 @@ def get_headlines(feed_mod, now, now_str):
         else feed_mod.DEBUG_FILE_OVERRIDE)
     parsed_feed = feedparser_parse(feed_url_or_path)
 
-    return [ ( construct_headline(entry, feed_mod) + ' ' +
-               feed_mod.NAME + ' ' +
-               "%d-%.2d-%.2d" % entry.published_parsed[:3]
-              )
-             for entry in parsed_feed.entries
-             # only do articles past a cutoff
-             if (datetime.fromtimestamp(mktime(entry.published_parsed))
-                 > cutoff )
-            ]
+    headlines =  [ ( construct_headline(entry, feed_mod) + ' ' +
+                     feed_mod.NAME + ' ' +
+                     "%d-%.2d-%.2d" % entry.published_parsed[:3] )
+                   for entry in parsed_feed.entries
+                   # only do articles past a cutoff
+                   if (datetime.fromtimestamp(mktime(entry.published_parsed))
+                       > cutoff ) ]
+    if hasattr(feed_mod, 'INCLUDE_FILTER_FUNC'):
+        headlines = list(filter(feed_mod.INCLUDE_FILTER_FUNC, headlines))
+    return headlines
 
 SHUFFLE = True # False may help when debugging
 MAX_STORIES = 10
