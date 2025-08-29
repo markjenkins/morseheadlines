@@ -39,4 +39,4 @@ ENTRY_ATTRIBUTES = [TITLE_ATTRIBUTE, SUMMARY_ATTRIBUTE]
 
 # for development/debugging, downloading the file with curl/wget etc and
 # enabling this is recommended to avoid hitting the server over and over
-#DEBUG_FILE_OVERRIDE = 'CP_via_CNO_2024-01-28.rss'
+#DEBUG_FILE_OVERRIDE = 'CP_via_CNO.rss'
